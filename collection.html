@@ -1,0 +1,22 @@
+<html>
+    <body>
+        <h2>JavaScript HTML DOM</h2>
+
+        <p>Hello World!1</p>
+
+        <p>Hello Norway!2</p>
+
+        <p>Hello World!3</p>
+        <p>Hello Norway!4</p>
+
+
+        <p id="demo"></p>
+
+        
+        <script>
+             
+            const myCollection = document.getElementsByTagName("p");
+            document.getElementById("demo").innerHTML = "The innerHTML of the second paragraph is: " +myCollection[1].innerHTML;
+        </script>
+    </body>
+</html>

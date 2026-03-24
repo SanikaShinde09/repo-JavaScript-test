@@ -1,0 +1,21 @@
+<html>
+    <body>
+        
+    <div>
+          <input type="text" id="num1" value="" onchange="shownumber()" onkeypress="shownumber()">
+          <input type="text" id="num2" readonly >
+    </div><br>
+
+    <button onclick="shownumber()">submit</button>
+
+    <div id="output"></div> 
+
+    <script>
+         function shownumber(){
+        document.getElementById("output").innerHTML = num1.value;
+        document.getElementById("num2").value = num1.value;
+
+         }
+    </script>
+    </body>
+</html>

@@ -1,0 +1,220 @@
+<html>
+
+<head>
+    <title>Form Task</title>
+
+</head>
+<style>
+    body {
+        background-image: url(./image/flat-lay-back-school-concept-with-copy-space.jpg);
+        background-size: cover;
+    }
+
+
+
+    .output1 {
+
+        border: 2px solid;
+        border-radius: 10px;
+        width: 39%;
+        padding: 15px;
+        margin-left: auto;
+        margin-top: 5px;
+        margin-right: auto;
+        word-wrap: break-word;
+
+    }
+
+
+    .ipfield {
+        width: 100%;
+        height: 40px;
+        padding: 5px;
+        border-radius: 5px;
+        opacity: 0.5;
+    }
+
+    .submit {
+        width: 40%;
+        height: 33px;
+        border-radius: 40px;
+        box-shadow: inset 0 0 7px 3px rgb(14 14 14 / 39%);
+        margin: 5px;
+
+    }
+
+    label {
+        font-size: 25px;
+    }
+
+    /* Base style for mobile  devices */
+    .form {
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px;
+        border: 2px solid #5a5858;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 0 10px 9px rgba(0, 0, 0, 0.1);
+    }
+
+    /* For devices with a minimum width of 768px (Medium) */
+    @media screen and (min-width: 768px) {
+        .form {
+            width: 80%;
+            height: auto;
+
+        }
+
+        .output1 {
+            width: 69%;
+        }
+    }
+
+    /* For devices with a minimum width of 992px (Large) */
+    @media screen and (min-width: 992px) {
+        .form {
+            width: 65%;
+            height: auto;
+        }
+
+        .output1 {
+            width: 64%;
+        }
+    }
+</style>
+
+
+<body>
+    <div class="form">
+        <div class="input">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" class="ipfield"><br>
+            <span id="nameerror" style="color: red;"></span>
+        </div><br>
+        <div>
+            <label for="mobile">Mobile:</label><br>
+            <input type="tel" id="mobile" name="mobile" class="ipfield"><br>
+            <span id="mobileerror" style="color: red;"></span>
+        </div><br>
+        <div>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" class="ipfield"><br>
+            <span id="emailerror" style="color: red;"></span>
+        </div><br>
+        <div>
+            <label for="age">Age:</label><br>
+            <input type="number" name="age" id="age" class="ipfield"><br>
+            <span id="ageerror" style="color: red;"></span>
+        </div><br>
+        <div>
+            <label for="address">Address:</label><br>
+            <textarea name="address" id="address" class="ipfield" style="max-width: 100%;"></textarea><br>
+            <span id="addresserror" style="color: red;"></span>
+        </div><br>
+        <div>
+            <label for="gender">Gender:</label><br>
+            <label for="m">M</label>
+            <input type="radio" name="gender" id="m">
+            <label for="f">F</label>
+            <input type="radio" name="gender" id="f">
+            <label for="o">O</label>
+            <input type="radio" name="gender" id="o"><br>
+            <span id="gendererror" style="color: red;"></span>
+        </div><br>
+        <div style="text-align: center ;">
+            <input type="button" class="submit" value="Submit" onclick="save(),requried()">
+        </div>
+
+    </div>
+    <div id="output"></div>
+    <script>
+        function requried() {
+            let name = document.getElementById("name").value;
+            if (name == "") {
+                document.getElementById("nameerror").innerHTML = "Enter a valid name";
+            } else if (name.length < 5) {
+                document.getElementById("nameerror").innerHTML = "Name is less than 5 characters";
+            } else {
+                document.getElementById("nameerror").innerHTML = "";
+            }
+
+            let mobile = document.getElementById("mobile").value;
+            if (mobile == "") {
+                document.getElementById("mobileerror").innerHTML = "Enter a valid mobile number";
+            } else if (mobile.length != 10) {
+                document.getElementById("mobileerror").innerHTML = "Enter a 10 digit mobile number";
+            } else {
+                document.getElementById("mobileerror").innerHTML = "";
+            }
+
+            let email = document.getElementById("email").value;
+            const epattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!epattern.test(email)) {
+                document.getElementById("emailerror").innerHTML = "Enter a valid email";
+            } else {
+                document.getElementById("emailerror").innerHTML = " ";
+            }
+
+            let age = document.getElementById("age").value;
+            if (age <= 18) {
+                document.getElementById("ageerror").innerHTML = "Enter a age below 18";
+            } else if (age >= 35) {
+                document.getElementById("ageerror").innerHTML = "Enter a age above 35";
+            } else {
+                document.getElementById("ageerror").innerHTML = "";
+            }
+
+            let address = document.getElementById("address").value;
+            if (address == "") {
+                document.getElementById("addresserror").innerHTML = "Enter a valid address";
+            } else {
+                document.getElementById("addresserror").innerHTML = "";
+            }
+
+
+            let ischecked = false;
+            const genderInputs = document.querySelectorAll('input[name="gender"]');
+            for (let i = 0; i < genderInputs.length; i++) {
+                if (genderInputs[i].checked) {
+                    ischecked = true;
+                    break;
+                }
+            }
+            if (!ischecked) {
+                document.getElementById("gendererror").innerHTML = "Select a gender ";
+            } else {
+                document.getElementById("gendererror").innerHTML = "";
+            }
+        }
+
+        function save() {
+            const name = document.getElementById("name").value;
+            const mobile = document.getElementById("mobile").value;
+            const email = document.getElementById("email").value;
+            const age = document.getElementById("age").value;
+            const address = document.getElementById("address").value;
+            const genderInputs = document.querySelectorAll('input[name="gender"]');
+            const gender = genderInputs[0].checked ? "M" : genderInputs[1].checked ? "F" : "O";
+
+
+
+            document.getElementById("output").innerHTML = `
+            <div class="output1">
+            <div>
+            <b>Form Data:</b><br>
+            Name: ${name}<br>
+            Mobile: ${mobile}<br>
+            Email: ${email}<br>
+            Age: ${age}<br>
+            Address: ${address}<br>
+            Gender: ${gender}<br>
+            </div>
+            </div>
+            `
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+<html>
+
+<head>
+  <style>
+    .main {
+      width: 40%;
+      border: 2px solid;
+      border-radius: 10px;
+      text-align: -webkit-center;
+      padding: 37px 30px;
+      margin-left: auto;
+      margin-right: auto;
+      height: auto;
+      margin-top: 5%;
+    }
+
+    #clear {
+      position: absolute;
+      top: 86%;
+      right: 0px;
+      height: 50px;
+      width: 50px;
+      border-radius: 50px;
+      font-size: 30px;
+
+    }
+
+    #Calculator {
+      width: 100%;
+      height: 200px;
+      border: 1px solid;
+      position: relative;
+      margin-bottom: 23px;
+
+    }
+
+    .display {
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+      background-color: rgb(49, 226, 78);
+      padding: 5px;
+      width: 100%;
+      gap: 5px;
+    }
+
+    .display div {
+      background-color: #00e1ff;
+      color: black;
+      padding: 30px 10px;
+      font-size: 40px;
+      text-align: center;
+    }
+
+
+    /* For devices with a minimum width of 768px (Medium) */
+    @media screen and (min-width: 508px) {
+      .main {
+        background-color: blue;
+        color: white;
+
+      }
+    }
+
+    /* For devices with a minimum width of 992px (Large) */
+    @media screen and (min-width: 992px) {
+      .main {
+        background-color: tan;
+        color: black;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+  <div class="main">
+    <div id="Calculator">
+
+      <div id="output">
+        <div>
+          <h5 id="result"></h5>
+        </div>
+      </div>
+      <button id="clear" onclick="Clearresult()">C</button>
+
+    </div>
+
+
+    <div class="display">
+
+      <div id="one" onclick="onClickCalButtons(1)">1</div>
+      <div id="two" onclick="onClickCalButtons(2)">2</div>
+      <div id="three" onclick="onClickCalButtons(3)">3</div>
+      <div id="plus" onclick="onClickCalButtons('+')">+</div>
+
+      <div id="four" onclick="onClickCalButtons(4)">4</div>
+      <div id="five" onclick="onClickCalButtons(5)">5</div>
+      <div id="six" onclick="onClickCalButtons(6)">6</div>
+      <div id="minus" onclick="onClickCalButtons('-')">-</div>
+
+      <div id="seven" onclick="onClickCalButtons(7)">7</div>
+      <div id="eight" onclick="onClickCalButtons(8)">8</div>
+      <div id="nine" onclick="onClickCalButtons(9)">9</div>
+      <div id="back" onclick="onClickCalButtons('/')">/</div>
+
+      <div id="zero" onclick="onClickCalButtons(0)">0</div>
+      <div id="dot" onclick="onClickCalButtons('.')">.</div>
+      <div id="multi" onclick="onClickCalButtons('*')">*</div>
+      <div id="equal" onclick="Calculate('=')">=</div>
+
+    </div>
+  </div>
+  <script>
+
+    let experssion = [];
+    function Clearresult() {
+      experssion = [];
+      document.getElementById("result").innerHTML = experssion;
+    }
+
+    function onClickCalButtons(value) {
+      let lengthExpression = experssion.length;
+      let lastElement = experssion[lengthExpression - 1];
+      if (isNaN(value) && (lastElement == '+' || lastElement == '-' || lastElement == '*' || lastElement == '/')) return;
+      if (lengthExpression > 0 && Number(lastElement) > 0 &&
+        !(value == '+' || value == '-' || value == '*' || value == '/')) {
+        let finalValue = "" + lastElement + "" + value;
+        experssion[lengthExpression - 1] = finalValue
+      } else {
+        experssion.push(value)
+      }
+      console.log("expression", experssion)
+      let result = '';
+      for (let i = 0; i < experssion.length; i++) {
+        if (experssion[i] == '+' || experssion[i] == '-' ||
+          experssion[i] == '*' || experssion[i] == '/') {
+          result += (' ' + experssion[i] + ' ');
+        } else {
+          result += (experssion[i]);
+        }
+      }
+
+      result += '';
+      document.getElementById("result").innerHTML = result;
+    }
+
+
+    function Calculate() {
+      let result = 0;
+      let num1 = 0;
+      let num2 = 0;
+      let casee = "+";
+      for (let i = 0; i < experssion.length; i++) {
+        let isCase = (experssion[i] == '+' || experssion[i] == '-' || experssion[i] == '*' || experssion[i] == '/');
+        if (i == 0) {
+          result = Number(experssion[i]);
+        } else if (isCase) {
+          casee = experssion[i];
+        } else {
+          num1 = Number(result);
+          num2 = Number(experssion[i]);
+          console.log("num1---", num1, "num2----", num2)
+
+
+
+          switch (casee) {
+            case "+": {
+              result = add(num1, num2);
+              break;
+            }
+            case "-": {
+              result = subs(num1, num2);
+              break;
+            }
+            case "*": {
+              result = multi(num1, num2);
+              break;
+            }
+            case "/": {
+              result = division(num1, num2);
+              break;
+            }
+            default: result;
+              break;
+          }
+        }
+        console.log("=----------result", result);
+      }
+      console.log("=------------final result", result);
+      let resultDoc = document.getElementById("result").innerHTML;
+      resultDoc = resultDoc + " = " + result
+      document.getElementById("result").innerHTML = resultDoc;
+    }
+    function add(num1, num2) {
+      return num1 + num2
+    }
+    function subs(num1, num2) {
+      return num1 - num2
+    }
+    function multi(num1, num2) {
+      return (num1 * num2).toFixed(2);
+    }
+    function division(num1, num2) {
+      return (num1 / num2).toFixed(2);
+    }
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<html>
+
+<head>
+    <title>Task Manager</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .main {
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+
+        }
+
+        h1 {
+            color: rgb(3, 156, 245);
+            text-align: center;
+        }
+
+        #taskInput {
+            height: 25px;
+
+        }
+
+        #addTaskBtn {
+            padding: 5px;
+            background-color: #1067ff;
+            color: white;
+            border-radius: 8px;
+            border: none;
+        }
+
+        #remove {
+            padding: 4px;
+            background-color: #ff4810;
+            color: white;
+            border-radius: 8px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div>
+            <h1>Task Manager</h1>
+        </div>
+        <div style=" text-align: center;">
+            <input type="text" value="" id="taskInput" placeholder="What needs to be done?">
+            <button id="addTaskBtn" onclick="addtask()">AddTask</button>
+        </div>
+
+
+        <div id="taskList">
+            <!-- <div style="border-bottom: 2px dashed grey;padding: 5px;display: grid;
+             grid-template-columns: auto auto auto;justify-items: center;">
+                                <div>
+      <i class="fa fa-check" id="icon" style="color: limegreen;" onmouseover="check()"
+                                   onmouseout="checkout()"></i>
+                     </div>
+             <div id="tasknm"></div>
+                    <div>
+                        <button id="renderTasks">Remove</button>
+                  </div>
+          </div> -->
+        </div>
+    </div>
+
+    <script>
+        function check(num) {
+            document.getElementById("iconn" + num).style.border = "1px solid blue";
+        }
+        function checkout(num) {
+            document.getElementById("iconn" + num).style.border = "none";
+        }
+
+        let tasks = [];
+
+        const taskInput = document.getElementById('taskInput');
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const taskList = document.getElementById('taskList');
+
+
+        function addtask() {
+            let addtask1 = document.getElementById("taskInput").value;
+            console.log("--------------65", addtask1)
+            tasks.push(addtask1);
+            let output = '';
+            for (let i = 0; i < tasks.length; i++) {
+                output += `<div style="border-bottom: 2px dashed grey;padding: 5px;display:grid;
+                grid-template-columns: auto auto auto;justify-items: center;" id="taskdiv${i}">
+                             <div>
+                       <i class="fa fa-check" id="iconn${i}" style="color: limegreen;" 
+                       onmouseover="check(${i})"
+                          onmouseout="checkout(${i})"></i>
+                             </div>
+                           <div id="tasknm${i}">${tasks[i]}</div>
+                              <div>
+                               <button id="remove" onclick="remove(${i})" >Remove</button>
+                              </div>
+                        </div>`;
+            }
+            document.getElementById("taskList").innerHTML = output;
+            console.log("------102", tasks);
+        }
+
+
+    
+    
+ 
+
+function remove(i) {
+  const taskList = document.getElementById('taskdiv' + i);
+  taskList.remove();
+    tasks.splice(i, 1);
+  let output = '';
+            for (let i = 0; i < tasks.length; i++) {
+                output += `<div style="border-bottom: 2px dashed grey;padding: 5px;display:grid;
+                grid-template-columns: auto auto auto;justify-items: center;" id="taskdiv${i}">
+                             <div>
+                       <i class="fa fa-check" id="iconn${i}" style="color: limegreen;" 
+                       onmouseover="check(${i})"
+                          onmouseout="checkout(${i})"></i>
+                             </div>
+                           <div id="tasknm${i}">${tasks[i]}</div>
+                              <div>
+                               <button id="remove" onclick="remove(${i})" >Remove</button>
+                              </div>
+                        </div>`;
+            }
+            document.getElementById("taskList").innerHTML = output;
+            console.log("------102", tasks);
+}
+ 
+
+    </script>
+</body>
+</html>

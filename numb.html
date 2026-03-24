@@ -1,0 +1,55 @@
+<html>
+
+<body>
+    <h2>Javascript Validation</h2>
+
+    <p>Please input a number between 1 to 10</p>
+
+    <input id="numb">
+
+    <button type="button" onclick="myFunction()">Submit</button>
+
+    <p id="demo"></p>
+
+    <script>
+        function myFunction() {
+
+            let x = document.getElementById("numb").value;
+            
+            let text;
+            if (isNaN(x) || x < 1 || x > 10) {
+                text = "Input not valid";
+            } else {
+                text = "Input OK";
+            }
+            document.getElementById("demo").innerHTML = text;
+        }
+    </script>
+</body>
+
+</html>
+
+<!-- .main {
+            background-color: olive;
+            color: white;
+            width: 40%;
+        }
+
+        /* For devices with a minimum width of 768px (Medium) */
+        @media screen and (min-width: 508px) {
+            .main {
+                background-color: blue;
+                color: white;
+                width: 40%;
+            }
+        }
+
+        /* For devices with a minimum width of 992px (Large) */
+        @media screen and (min-width: 992px) {
+            .main {
+                background-color: tan;
+                color: black;
+                width: 50%;
+            }
+        }
+     -->
